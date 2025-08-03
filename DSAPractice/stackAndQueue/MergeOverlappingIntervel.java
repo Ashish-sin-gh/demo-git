@@ -3,6 +3,8 @@ package DSAPractice.stackAndQueue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Stack;
 
 public class MergeOverlappingIntervel {
     public static void main(String[] args) throws IOException {
@@ -36,17 +38,56 @@ public class MergeOverlappingIntervel {
             pairs[i] = new Pair(meetingIntervals[i][0], meetingIntervals[i][1]);
         }
         // sort the array against fist element
+        // we will use Comparable Interface for this
+        Arrays.sort(pairs);
+        
+        Stack<Pair> st = new Stack<>();
 
+        for(int i = 0; i < pairs.length; i++ ){
+            if(i == 0){
+                st.push(pairs[i]);
+            } else {
+                Pair top = st.peek();
+                if(pairs[i].startInterval > top.endInterval){
+                    st.push(pairs[i]);
+                }else{
+                    top.endInterval = Math.max(top.endInterval, pairs[i].endInterval);
+                }
+            }
+        }
+
+        Stack<Pair> reversedStack = new Stack<>();
+        while(!st.isEmpty()){
+            reversedStack.push(st.pop());
+        }
+
+        while(!reversedStack.isEmpty()){
+            Pair p = reversedStack.pop();
+            System.out.println(p);
+        }
     }
 
     // why this class - coz you want to sort the pair (object) which isnt possible implecitly like sorting an int array
-    public static class Pair{
+    public static class Pair implements Comparable<Pair>{
         int startInterval;
         int endInterval;
 
         Pair(int si, int ei){
             this.startInterval = si;
             this.endInterval = si;
+        }
+
+        
+        @Override
+        //this > other return +ve
+        //this == other return 0
+        //this < other return -ve
+        public int compareTo(Pair other){
+            if(this.startInterval != other.startInterval){
+                return this.startInterval - other.startInterval;
+            } else {
+                return this.endInterval - other.endInterval;
+            }
         }
     }
 }
