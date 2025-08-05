@@ -1,4 +1,4 @@
-package DSAPractice.linkedList;
+package linkedList;
 
 public class AtLl {
     public static void main(String[] args){

@@ -1,4 +1,4 @@
-package DSAPractice.linkedList;
+package linkedList;
 
 public class ArrayToLinkedList {
     public static void main(String[] args) {
