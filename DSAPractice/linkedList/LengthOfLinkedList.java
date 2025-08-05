@@ -1,4 +1,4 @@
-package DSAPractice.linkedList;
+
 
 public class LengthOfLinkedList {
     public static void main(String[] args) {
