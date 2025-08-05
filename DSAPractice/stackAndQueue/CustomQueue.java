@@ -66,6 +66,13 @@ public class CustomQueue {
             }
         }
 
-        
+        // find the peek
+        public int peek(){
+            if(!this.isEmpty()){
+                return this.queueArray[this.startPointer];
+            } else{
+                return -1;
+            }
+        }
     }
 }
